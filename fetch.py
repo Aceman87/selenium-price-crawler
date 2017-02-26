@@ -18,17 +18,18 @@ class Fetcher:
 
         output = []
         for data in self.input_data:
-            print("Getting URL",len(output)+1,"...")
-            driver.get(data[0])
+            print("Getting URL",len(output)+1,data[0],"...")
+            driver.get(data[1])
             price_time = time.strftime("%d.%m.%Y_%H:%M", time.localtime())
-            price_element = driver.find_element_by_id(data[1])
+            price_element = driver.find_element_by_id(data[2])
 
             price_data = []
-            unicode_url = data[0].encode('utf-8')
-            price_data.append(hashlib.md5(unicode_url).hexdigest())
+            #unicode_url = data[1].encode('utf-8')
+            #price_data.append(hashlib.md5(unicode_url).hexdigest())
+            price_data.append(data[0])
             price_data.append(price_time)
             price_data.append(price_element.text)
-            price_data.append(data[2])
+            price_data.append(data[3])
             output.append(price_data)
             #print (price_element.text)
 
