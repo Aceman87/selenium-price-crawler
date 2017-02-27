@@ -31,19 +31,27 @@ class Drawer:
         traces = {}
         with open(self.datafile, 'r') as f: 
             for line in f: 
-                data_split = line.split('|', 3 )
+                data_split = line.split('|')
 
                 # Create a new dictionary for the id in data_split[0] if there is none
                 if traces.get(data_split[0]) == None:
                     traces[data_split[0]] = {'x':[],'y':[]}
 
                 # Parse a time from the time string
-                data_split[1] = datetime.strptime(data_split[1],"%d.%m.%Y_%H:%M")
+                #print ('Original time string: ' + data_split[1])
+                #data_split[1] = datetime.strptime(data_split[1],"%Y-%m-%d %H:%M")
+                #print ('Parsed time: ' + str(data_split[1]))
                 # Remove letters from the price
                 data_split[2] = self.non_letter.sub('', data_split[2])
                 # Parse the price into a float
                 data_split[2] = self.parse_price(data_split[2])
-                data_split[3] = data_split[3].rstrip('\n')
+                # Strip line change
+                last_item = len(data_split)-1
+                data_split[last_item] = data_split[last_item].rstrip('\n')
+                # Add possible additional costs to price
+                if len(data_split) is 5:
+                    additional_price = self.parse_price(data_split[4])
+                    data_split[2] += additional_price
                 # Convert currency if needed
                 if data_split[3] != self.currency:
                     #print ("Converting currency: ", data_split[2], data_split[3], self.currency)
