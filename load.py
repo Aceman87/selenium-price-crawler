@@ -7,6 +7,6 @@ class Loader:
         with open(datafile, 'r') as f: 
             for line in f:
                 #strip line changes and split into three parts by '|'
-                data_split = line.rstrip('\n').split('|', 3 )
+                data_split = line.rstrip('\n').split('|')
                 self.output.append(data_split)
         return self.output
