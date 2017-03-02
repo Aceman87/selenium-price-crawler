@@ -3,5 +3,5 @@ Fetches product prices from the web, converts the currencies and plots price dev
 
 
 <a href="Screenshot.png">
-	<img src="Screenshot.png" alt="Screenshot" style="width:60em;border-style: solid;border-color: gray;border-width: 2px;">
+	<img src="Screenshot.png" alt="Screenshot" style="width:60em;border:2px solid black">
 </a>
