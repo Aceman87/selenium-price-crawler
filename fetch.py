@@ -1,8 +1,10 @@
 import hashlib
 import time
 import os
+#import base64
 from draw import Drawer
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 class Fetcher:
@@ -25,7 +27,15 @@ class Fetcher:
             print("Getting URL",count," \'",data[0],"\'...")
             driver.get(data[1])
             price_time = time.strftime("%Y-%m-%d %H:%M", time.localtime())
-            price_element = driver.find_element_by_id(data[2])
+            price_element = None
+            try:
+                price_element = driver.find_element_by_id(data[2])
+            except NoSuchElementException as err:
+                print("NoSuchElementException, the price element was not found: {0}".format(err.msg))
+                # Uncomment to save exception screenshot
+                #with open('error.png', "wb") as fh:
+                #    fh.write(base64.standard_b64decode(err.screen))
+                continue
             #driver.save_screenshot(count + '_out.png')
 
             price_data = []
