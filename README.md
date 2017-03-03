@@ -9,7 +9,7 @@ The program runs through an input file, with input rows such as the rows below:<
 <br><br>
 
 The syntax for a input row is as follows:<br><br>
-<code>Handle|URL|Price_tag_id|Currency_code|Optiona_price_offset_decimal</code><br><br>
+<code>Handle|URL|Price_tag_id|Currency_code|Optional_price_offset_decimal</code><br><br>
 
 The results of the crawl will be output to "watch_prices.txt". This file will then be input to the Plotly graph plotter, which will use the input to create a graph HTML file like below:
 
